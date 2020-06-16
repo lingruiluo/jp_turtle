@@ -1,4 +1,5 @@
 # jp_turtle
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/lingruiluo/jp_turtle/master).. image:: https://mybinder.org/badge_logo.svg
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/lingruiluo/jp_turtle/master)
+.. image:: https://mybinder.org/badge_logo.svg
  :target: https://mybinder.org/v2/gh/lingruiluo/jp_turtle/master
