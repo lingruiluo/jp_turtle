@@ -13,3 +13,9 @@ pip install -e .
 ```
 pip install git+https://github.com/lingruiluo/jp_turtle.git
 ```
+
+## User upgrade
+
+```
+pip install git+https://github.com/lingruiluo/jp_turtle.git --upgrade
+```
