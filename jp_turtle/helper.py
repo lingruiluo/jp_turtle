@@ -2,6 +2,8 @@
 some helper functions
 """
 
+import math
+
 def rotate_translate(x, y, radians, xt, yt):
     s = math.sin(radians)
     c = math.cos(radians)
