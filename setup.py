@@ -15,7 +15,8 @@ setup(
     author_email="awatters@flatironinstitute.org; ll3356@columbia.edu",
     url=url,
     install_requires=[
-        "jp_proxy_widget", 
+        "jp_doodle", 
+        "jp_proxy_widget",
         #"requests", 
         #"matplotlib", 
         #"numpy", 
