@@ -7,3 +7,9 @@
 ```
 pip install -e .
 ```
+
+## User install
+
+```
+pip install git+https://github.com/lingruiluo/jp_turtle.git
+```
