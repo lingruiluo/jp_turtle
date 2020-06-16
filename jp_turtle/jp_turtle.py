@@ -491,6 +491,24 @@ class Turtle:
             self.next_execution_time = now
         return interval
 
+    def execute_when_ready(self, action):
+        if not self.speed_move:
+            # execute immediately
+            return action()
+        now = time.time()
+        ms_interval = (self.next_execution_time - now) * 1000
+        self.execute_from_javascript(action, ms_interval)
+
+    def execute_from_javascript(self, action, interval=1):
+        def act_then_reset():
+            action()
+            now = time.time()
+            #print ("   resetting execution time to", now)
+            if now > self.next_execution_time:
+                self.next_execution_time = now
+        interval = max(interval, 1)
+        self.screen.setTimeout(act_then_reset, interval)
+
     def delay_seconds(self, distance=0):
         "Eventually this should return different values based on different speeds and distances"
         speed = self.speed_move
