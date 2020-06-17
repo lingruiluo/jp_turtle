@@ -135,7 +135,10 @@ class Turtle:
         assert two == 2
         self.screen.auto_flush = False
         return FakeScreen()
- 
+    
+    def screen_color(self, color):
+        bgcolor(self.screen, color)
+
     def click_event(self, event):
         location = event["model_location"]
         def action(*ignored):

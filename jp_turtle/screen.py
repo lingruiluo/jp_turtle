@@ -32,7 +32,7 @@ def get_usual_screen(width=WIDTH, height=HEIGHT):
         screen.element.dialog(dict(width=width+100, height=height+100))
     else:
          display(screen.debugging_display())
-    screen.rect(0, 0, 400, 400, "#eea")
+    screen.rect(0, 0, 400, 400, "#eea",name='Screen')
     screen.fit()
     USUAL_SCREEN = screen
     return screen
@@ -40,6 +40,9 @@ def get_usual_screen(width=WIDTH, height=HEIGHT):
 def reset():
     global USUAL_SCREEN
     USUAL_SCREEN = None
+
+def bgcolor(screen, color):
+    screen.change(name='Screen',color=color)
 
 class FakeScreen:
     
