@@ -172,6 +172,7 @@ class Turtle:
 
     def home(self):
         self.goto((0,0))
+        self.setheading(0)
     
     def goto(self, x, y = None):
         if self.draw_limit_exceeded():
@@ -399,13 +400,13 @@ class Turtle:
         };
     """
     
-    def dot(self,size=None,*color):
+    def dot(self,size=None,color=None):
         if self.draw_limit_exceeded():
             return
         (x1, y1) = self.position_icon
         if size is None:
             size = 5
-        if not color:
+        if color is None:
             color = self._color
         delay = self.delay_seconds()
         self.defer_later_executions(delay)
