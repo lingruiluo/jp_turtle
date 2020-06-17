@@ -13,6 +13,10 @@ pip install -e .
 ```
 pip install git+https://github.com/lingruiluo/jp_turtle.git
 ```
+The module requires `jp_doodle` to implement, you can download the `jp_doodle` package by following
+```
+pip install git+https://github.com/AaronWatters/jp_doodle.git
+```
 
 ## User upgrade
 
