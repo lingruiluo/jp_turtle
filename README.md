@@ -47,7 +47,7 @@ It will be covering basic functions provided by `jp_turtle`.
 - **Pen**: color, linewidth, up, down
 - **Screen**: background color, click movement event
 
- | 
-----------|----------  
-![](/pics/nautilus.png)|[Nautilus](https://github.com/lingruiluo/jp_turtle/blob/master/notebooks/Nautilus%20example.ipynb)  
-![](/pics/rainbow square.png)|[Rainbow Square](https://github.com/lingruiluo/jp_turtle/blob/master/notebooks/Drawing%20Graphics.ipynb)  
+no header | no
+---------- | ----------    
+![](/pics/nautilus.png =100x100) | [Nautilus](https://github.com/lingruiluo/jp_turtle/blob/master/notebooks/Nautilus%20example.ipynb)    
+![](/pics/rainbow square.png =100x100) | [Rainbow Square](https://github.com/lingruiluo/jp_turtle/blob/master/notebooks/Drawing%20Graphics.ipynb)    
