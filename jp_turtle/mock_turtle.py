@@ -17,8 +17,17 @@ import turtle
 import jp_turtle
 from jp_turtle import screen
 
+def undefined_mock_operation(_name):
+    print("Stubbing out", _name)
+    def stub(*args, **kwargs):
+        print (_name, "is not implemented for mock turtle")
+    return stub
+
 def mock_turtle():
+    print("Now replacing standard turtle.py functionality with jp_turtle functionality or stubs.")
     turtle.Turtle = jp_turtle.Turtle
     turtle.Pen = jp_turtle.Turtle
     turtle.Screen = screen.FakeScreen
+    turtle.tracer = undefined_mock_operation("tracer")
+    turtle.colormode = undefined_mock_operation("colormode")
 
