@@ -57,17 +57,20 @@ class Turtle:
             10, 10, WIDTH-10, HEIGHT-10,
             -WIDTH/2, -HEIGHT/2, WIDTH/2, HEIGHT/2,
         );
-        info.icon = info.frame.polygon({
-            points:icon_points, color:color, name:true
+        info.initialize_frame = function () {
+            info.icon = info.frame.polygon({
+                points:icon_points, color:color, name:true
+                });
+            info.frame_rect = info.frame.rect({
+                x:-WIDTH/2-10, 
+                y:-HEIGHT/2-10, 
+                w:WIDTH, 
+                h:HEIGHT, 
+                color:"rgb(0,0,0,0)", 
+                name:true,
             });
-        info.frame_rect = info.frame.rect({
-            x:-WIDTH/2-10, 
-            y:-HEIGHT/2-10, 
-            w:WIDTH, 
-            h:HEIGHT, 
-            color:"rgb(0,0,0,0)", 
-            name:true,
-        });
+        }
+        info.initialize_frame();
         info.delayed_execution = function(action, delay) {
             if (delay > 0) {
                 setTimeout(action, delay);
@@ -93,6 +96,7 @@ class Turtle:
             + self.dot_js
             + self.icon_size_js
             + self.stamp_js
+            + self.reset_js
         )
         screen.js_init(
             self.all_js,
@@ -111,12 +115,18 @@ class Turtle:
         self.icon_current_points = self.icon_points
         self.next_execution_time = time.time()
         #print("initially executing at", self.next_execution_time)
+
+    last_fit = 0
+    fit_limit = 1000
         
     def draw_limit_exceeded(self):
         self.draw_count += 1
         if self.draw_count == self.draw_limit:
             print ("\n   DRAW LIMIT REACHED\n")
             raise ValueError("Draw limit")
+        if (self.fit_limit is not None) and ((self.draw_count - self.last_fit) > self.fit_limit):
+            self.last_fit = self.draw_count
+            self.screen.element.fit()
         return (self.draw_limit is not None) and (self.draw_count > self.draw_limit)
 
     flushes = None
@@ -129,7 +139,7 @@ class Turtle:
         from jp_doodle.auto_capture import javascript_eval
         print ("FLUSH AND SYNC", self.draw_count)
         self.screen.flush()
-        self.screen.element.redraw()
+        self.screen.element.request_redraw()
         self.screen.auto_flush = True
         two = javascript_eval(self.screen, "1+1")
         assert two == 2
@@ -146,6 +156,7 @@ class Turtle:
         self.execute_when_ready(action)
     
     def up(self):
+        #print('up')
         # def action(*ignored):
         #     self._drawing = False
         # self.execute_when_ready(action)
@@ -155,6 +166,7 @@ class Turtle:
         # def action(*ignored):
         #     self._drawing = True
         # self.execute_when_ready(action)
+        #print("down")
         self._drawing = True
 
     def heading(self):
@@ -167,14 +179,17 @@ class Turtle:
         180 - west
         270 - south
         """
+        print ("setheading", degrees)
         degrees_change = degrees - (self.direction_radians * 180 / math.pi)
         self.left(degrees_change)
 
     def home(self):
+        #print ("home")
         self.goto((0,0))
         self.setheading(0)
     
     def goto(self, x, y = None):
+        #print ("goto", x, y)
         if self.draw_limit_exceeded():
             return
         (x1, y1) = self.position_icon
@@ -220,7 +235,7 @@ class Turtle:
     forward_js = """
         info.forward = function(points, x1, y1, x2, y2, color, lineWidth, drawing, delay, interval) {
             var action = function() {
-                element.fit();
+                //element.fit();
                 info.icon.transition({ points:points, cx:x2, cy:y2 }, delay);
                 if (drawing) {
                     var line = info.frame.line({
@@ -380,7 +395,7 @@ class Turtle:
     dot_js = """
         info.dot = function(x, y, r, color, delay) {
             var action = function() {
-                element.fit();
+                //element.fit();
                 var circle = info.frame.circle({
                     x:x, y:y, r:r,
                     color:color, fill:true, name: true
@@ -427,7 +442,9 @@ class Turtle:
         };
     """
     
-    def color(self, color_name):
+    def color(self, color_name, fill_color=None):
+        if fill_color is not None:
+            print ("fill color not yet supported")
         self._color = color_name
         delay = self.delay_seconds()
         self.defer_later_executions(delay)
@@ -464,7 +481,7 @@ class Turtle:
     icon_size_js = """
         info.icon_pensize = function(points, delay, interval) {
             var action=function(){
-                element.fit();
+                //element.fit();
                 info.icon.transition({ points:points }, delay);
             }
             info.delayed_execution(action, interval);
@@ -526,3 +543,41 @@ class Turtle:
             else:
                 speed = 0.2
         return speed
+
+    reset_js = """
+        info.reset = function() {
+            info.frame.reset_frame();
+            info.initialize_frame();
+        };
+    """
+
+    def reset(self):
+        self.js_info.reset()
+        self.js_info.frame_rect.on("click",self.click_event)
+        self.home()
+
+    def fillcolor(self, color):
+        print("fill color not yet implemented")
+
+    def begin_fill(self):
+        print("begin fill not yet implemented")
+
+    def end_fill(self):
+        print("begin fill not yet implemented")
+
+    # abbreviations taken from turtle.py
+    fd = forward
+    #bk = back
+    #backward = back
+    back = backward
+    bk = backward
+    rt = right
+    lt = left
+    #position = pos
+    pos = position
+    setpos = goto
+    setposition = goto
+    seth = setheading
+    ht = hideturtle
+    pu = up
+    pd = down
