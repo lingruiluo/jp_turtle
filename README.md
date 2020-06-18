@@ -40,4 +40,13 @@ Turtle graphics are vector graphics using a 'turtle' to control movement and dir
 
 ## Examples
 
-**Quick References:** Please see the [document](https://github.com/lingruiluo/jp_turtle/blob/master/notebooks/jp_turtle%20quick%20reference.ipynb) to quick start on `jp_turtle`.
+**Quick References:** Please see the [document](https://github.com/lingruiluo/jp_turtle/blob/master/notebooks/jp_turtle%20quick%20reference.ipynb) to quick start.  
+It will be covering basic functions provided by `jp_turtle`.  
+- **Movement**: distance, direction, speed  
+- **Icon (cursor or 'turtle')**: shape, color, size, hide, show 
+- **Pen**: color, linewidth, up, down
+- **Screen**: background color, click movement event
+
+----------|----------
+|[Nautilus](https://github.com/lingruiluo/jp_turtle/blob/master/notebooks/Nautilus%20example.ipynb)
+|[Rainbow Square](https://github.com/lingruiluo/jp_turtle/blob/master/notebooks/Drawing%20Graphics.ipynb)
