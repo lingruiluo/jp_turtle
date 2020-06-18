@@ -50,7 +50,9 @@ Turtle graphics are vector graphics using a 'turtle' to control movement and dir
 - **Movement**: distance, direction, speed  
 - **Icon (cursor or 'turtle')**: shape, color, size, hide, show 
 - **Pen**: color, linewidth, up, down
-- **Screen**: background color, click movement event
+- **Screen**: background color, click movement event  
+
+**Note: The following examples are executable Jupyter notebooks and are supposed to run interactively cell-by-cell.**
 
 |||        
 | - | - |   
