@@ -4,6 +4,8 @@
 
 `jp_turtle` is adapted from the Python turtle programming. It is designed to make it easy to program turtle graphics on Jupyter interface, supported by [`jp_doodle`](https://github.com/AaronWatters/jp_doodle) module which makes implementing special purpose interactive visualizations easy.
 
+<br>
+
 ## Installation
 
 To install the package for use with Jupyter Notebook, follow the instructions below.
@@ -34,9 +36,13 @@ pip install git+https://github.com/AaronWatters/jp_doodle.git
 pip install git+https://github.com/lingruiluo/jp_turtle.git --upgrade
 ```
 
+<br>
+
 ## Turtle Graphics
 
 Turtle graphics are vector graphics using a 'turtle' to control movement and direction. They can be complex patterns consisting of many simple graphics. It is one of the feature of [Logo programming language](https://en.wikipedia.org/wiki/Logo_(programming_language)#Turtle_and_graphics) is Please click the [link](https://en.wikipedia.org/wiki/Turtle_graphics) to read more.
+
+<br>
 
 ## Examples
 
