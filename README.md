@@ -56,4 +56,5 @@ It will be covering basic functions provided by `jp_turtle`.
 |||        
 | - | - |   
 |<img src="/pics/nautilus.png" width="100" height="100" />| **[Nautilus](https://github.com/lingruiluo/jp_turtle/blob/master/notebooks/Nautilus%20example.ipynb)**<br>The nautilus pattern consists of quares.<br> It can be drawn starting from a bigger square and by adjusting squares' direction and decreasing side length.|
-|<img src="/pics/rainbow square.png" width="100" height="100" />| [Rainbow Square](https://github.com/lingruiluo/jp_turtle/blob/master/notebooks/Drawing%20Graphics.ipynb)|   
+|<img src="/pics/rainbow square.png" width="100" height="100" />| **[Rainbow Square](https://github.com/lingruiluo/jp_turtle/blob/master/notebooks/Drawing%20Graphics.ipynb)**|  
+|<img src="/pics/spiral.png" width="100" height="100" />|**[Spiral](https://github.com/lingruiluo/jp_turtle/blob/master/notebooks/Spiral.ipynb)**|
