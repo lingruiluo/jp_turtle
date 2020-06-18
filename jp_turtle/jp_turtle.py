@@ -23,6 +23,7 @@ class Turtle:
     draw_limit = None
     draw_count = 0
     _drawing = True
+    verbose = False
 
     # stolen from turtle.py
     _shapes = {
@@ -81,7 +82,8 @@ class Turtle:
         element.turtle_info[turtle_id] = info;
     """
 
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
+        # args and kwargs are ignored for compatibility with turtle.py
         screen = self.screen = get_usual_screen()
         screen.turtle_count += 1
         self.turtle_id = screen.turtle_count
@@ -179,7 +181,7 @@ class Turtle:
         180 - west
         270 - south
         """
-        print ("setheading", degrees)
+        self.log("setheading", degrees)
         degrees_change = degrees - (self.direction_radians * 180 / math.pi)
         self.left(degrees_change)
 
@@ -189,7 +191,7 @@ class Turtle:
         self.setheading(0)
     
     def goto(self, x, y = None):
-        #print ("goto", x, y)
+        self.log("goto", x, y)
         if self.draw_limit_exceeded():
             return
         (x1, y1) = self.position_icon
@@ -213,6 +215,7 @@ class Turtle:
         self.js_info.forward(points, x1, y1, x2, y2, self._color, self.lineWidth, self._drawing,delay, self.action_delay())
         
     def distance(self, x, y=None):
+        self.log("distance", x, y)
         if self.draw_limit_exceeded():
             return
         (x1, y1) = self.position_icon
@@ -228,7 +231,7 @@ class Turtle:
         return round(math.sqrt((x2 - x1)**2 + (y2 - y1)**2),2)
 
     def shape(self, name):
-#         print ("shape")
+        self.log("shape", name)
         choice = self._shapes[name]
         choice.install(self)
         
@@ -254,7 +257,7 @@ class Turtle:
     """
 
     def forward(self, distance):
-        #print ("forward", distance)
+        self.log("forward", distance)
         if self.draw_limit_exceeded():
             return # silently do nothing
         angle = self.direction_radians
@@ -283,6 +286,7 @@ class Turtle:
     """
     
     def left(self, degrees):
+        self.log("left", degrees)
         if self.draw_limit_exceeded():
             return # silently do nothing
         radians = degrees * math.pi / 180.0
@@ -442,9 +446,12 @@ class Turtle:
         };
     """
     
-    def color(self, color_name, fill_color=None):
+    def color(self, color_name, fill_color=None, third_argument=None):
         if fill_color is not None:
             print ("fill color not yet supported")
+        if third_argument is not None:
+            print ("r,g,b numeric color not yet supported")
+            return
         self._color = color_name
         delay = self.delay_seconds()
         self.defer_later_executions(delay)
@@ -471,11 +478,15 @@ class Turtle:
             info.delayed_execution(action, delay);
         };
     """
+
+    icon_is_visible = True
     
     def hideturtle(self):
+        self.icon_is_visible = False
         self.js_info.icon_visible(False, self.action_delay())
     
     def showturtle(self):
+        self.icon_is_visible = True
         self.js_info.icon_visible(True, self.action_delay())
     
     icon_size_js = """
@@ -551,6 +562,18 @@ class Turtle:
         };
     """
 
+    def clone(self):
+        result = Turtle()
+        result.speed_move = self.speed_move
+        result._color = self._color
+        result.position_icon = self.position_icon
+        result.icon_is_visible = self.icon_is_visible
+        if not(result.icon_is_visible):
+            result.hideturtle()
+        result.setheading((self.direction_radians * 180 / math.pi))
+        result._drawing = self._drawing
+        return result
+
     def reset(self):
         self.js_info.reset()
         self.js_info.frame_rect.on("click",self.click_event)
@@ -564,6 +587,10 @@ class Turtle:
 
     def end_fill(self):
         print("begin fill not yet implemented")
+
+    def log(self, *args, **kwargs):
+        if self.verbose:
+            print(*args, **kwargs)
 
     # abbreviations taken from turtle.py
     fd = forward
@@ -580,4 +607,7 @@ class Turtle:
     seth = setheading
     ht = hideturtle
     pu = up
+    penup = up
     pd = down
+    pendown = down
+    pencolor = color
