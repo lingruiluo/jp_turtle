@@ -4,6 +4,10 @@
 
 `jp_turtle` is adapted from the Python turtle programming. It is designed to make it easy to program turtle graphics on Jupyter interface, supported by [`jp_doodle`](https://github.com/AaronWatters/jp_doodle) module which makes implementing special purpose interactive visualizations easy.
 
+<p align="center">
+  <img src="/pics/square_pattern.gif" width="350" height="350" />
+</p>
+
 <br>
 
 ## Installation
