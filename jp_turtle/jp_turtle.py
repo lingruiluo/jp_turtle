@@ -24,6 +24,9 @@ class Turtle:
     draw_count = 0
     _drawing = True
     verbose = False
+    _filling = False
+    _filling_pts = []
+    _filling_color = 'black'
 
     # stolen from turtle.py
     _shapes = {
@@ -99,6 +102,7 @@ class Turtle:
             + self.icon_size_js
             + self.stamp_js
             + self.reset_js
+            + self.fill_js
         )
         screen.js_init(
             self.all_js,
@@ -158,17 +162,9 @@ class Turtle:
         self.execute_when_ready(action)
     
     def up(self):
-        #print('up')
-        # def action(*ignored):
-        #     self._drawing = False
-        # self.execute_when_ready(action)
         self._drawing = False
 
     def down(self):
-        # def action(*ignored):
-        #     self._drawing = True
-        # self.execute_when_ready(action)
-        #print("down")
         self._drawing = True
 
     def heading(self):
@@ -186,7 +182,6 @@ class Turtle:
         self.left(degrees_change)
 
     def home(self):
-        #print ("home")
         self.goto((0,0))
         self.setheading(0)
     
@@ -212,6 +207,10 @@ class Turtle:
         self.icon_current_points = points
         self.position_icon = (x2, y2)
         self.defer_later_executions(delay)
+        if self._filling:
+            pt = list((round(x2,2),round(y2,2)))
+            if pt not in self._filling_pts:
+                self._filling_pts.append(pt)
         self.js_info.forward(points, x1, y1, x2, y2, self._color, self.lineWidth, self._drawing,delay, self.action_delay())
         
     def distance(self, x, y=None):
@@ -271,6 +270,10 @@ class Turtle:
         self.position_icon = (x2, y2)
         self.defer_later_executions(delay)
         interval = self.action_delay()
+        if self._filling:
+            pt = list((round(x2,2),round(y2,2)))
+            if pt not in self._filling_pts:
+                self._filling_pts.append(pt)
         self.js_info.forward(points, x1, y1, x2, y2, self._color, self.lineWidth, self._drawing, delay, interval)
         
     def backward(self, distance):
@@ -579,14 +582,36 @@ class Turtle:
         self.js_info.frame_rect.on("click",self.click_event)
         self.home()
 
+    fill_js = """
+        info.filling = function(points, color, interval) {
+            var action = function() {
+                var fill_polygon = info.frame.polygon({
+                    points:points,
+                    color:color,
+                    name:true,
+                    fill:true,
+
+                });
+            };
+            info.delayed_execution(action, interval);
+        };
+    """
+
     def fillcolor(self, color):
-        print("fill color not yet implemented")
+        self._filling_color = color
 
     def begin_fill(self):
-        print("begin fill not yet implemented")
+        if self._filling is False:
+            self._filling = True
+            (x , y) = self.position_icon
+            self._filling_pts = [list((round(x,2),round(y,2)))]
 
     def end_fill(self):
-        print("begin fill not yet implemented")
+        if self._filling:
+            self._filling = False
+            delay = self.delay_seconds()
+            self.defer_later_executions(delay)
+            self.js_info.filling(self._filling_pts, self._filling_color,self.action_delay())
 
     def log(self, *args, **kwargs):
         if self.verbose:
