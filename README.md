@@ -69,4 +69,4 @@ Turtle graphics are vector graphics using a 'turtle' to control movement and dir
 |<img src="/pics/sunflower.png" width="150" height="150" />|**[Sunflower](https://github.com/lingruiluo/jp_turtle/blob/master/notebooks/Sunflower.ipynb)**<br> Sunflower example |
 |<img src="/pics/signal_pattern.png" width="150" height="150" />|**[No Signal TV Pattern](https://github.com/lingruiluo/jp_turtle/blob/master/notebooks/No%20Signal%20TV%20Pattern.ipynb)**<br> No signal tv pattern |
 |<img src="/pics/clock.png" width="150" height="150" />|**[No Signal TV Pattern](https://github.com/lingruiluo/jp_turtle/blob/master/notebooks/Clock.ipynb)**<br> The example shows the current time on the screen. |
-|<img src="/pics/bytedesign.png" width="150" height="150" />|**[No Signal TV Pattern](https://github.com/lingruiluo/jp_turtle/blob/master/notebooks/bytedesign.ipynb)**<br> Adapted from python turtle bytedesign. |
+|<img src="/pics/bytedesign.png" width="150" height="150" />|**[bytedesign](https://github.com/lingruiluo/jp_turtle/blob/master/notebooks/bytedesign.ipynb)**<br> Adapted from python turtle bytedesign. |
