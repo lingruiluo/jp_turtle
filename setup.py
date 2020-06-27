@@ -26,6 +26,7 @@ setup(
         "imageio",
         #"sklearn",
         "jupyter-ui-poll",
+        "pytz",
         ],
     license="MIT"
 )
